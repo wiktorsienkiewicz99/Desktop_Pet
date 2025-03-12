@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://cqv42y5cckn4s"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_i4aob"]
+[ext_resource type="PackedScene" uid="uid://dbs5e6o2b5wys" path="res://Scenes/floating_window.tscn" id="4_ddjla"]
+[ext_resource type="Script" path="res://scripts/home.gd" id="4_jr2dm"]
+[ext_resource type="Texture2D" uid="uid://dh3lisnmupvp0" path="res://sprites/Panko-Sheet.png" id="4_k7jkb"]
+[ext_resource type="Texture2D" uid="uid://bcccj8fnomcg8" path="res://sprites/icon.svg" id="6_p2p20"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qi0gu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nr7dq"]
+atlas = ExtResource("4_k7jkb")
+region = Rect2(0, 304, 145, 74.545)
+
+[node name="MainScene" type="Node2D"]
+script = ExtResource("1_i4aob")
+
+[node name="Sunflower" type="Sprite2D" parent="."]
+visible = false
+z_index = 5
+material = SubResource("CanvasItemMaterial_qi0gu")
+position = Vector2(1496, 893)
+texture = ExtResource("6_p2p20")
+
+[node name="Window" parent="Sunflower" instance=ExtResource("4_ddjla")]
+transparent_bg = true
+visible = false
+
+[node name="Home" type="Sprite2D" parent="."]
+z_index = 5
+material = SubResource("CanvasItemMaterial_qi0gu")
+position = Vector2(1671, 880)
+rotation = 3.14159
+texture = SubResource("AtlasTexture_nr7dq")
+flip_v = true
+script = ExtResource("4_jr2dm")
+
+[node name="Window" parent="Home" instance=ExtResource("4_ddjla")]
+transparent_bg = true

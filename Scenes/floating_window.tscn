@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbs5e6o2b5wys"]
+
+[ext_resource type="Script" path="res://scripts/window.gd" id="1_8pe12"]
+
+[node name="Window" type="Window"]
+auto_translate_mode = 1
+position = Vector2i(0, 36)
+script = ExtResource("1_8pe12")
+
+[node name="Camera2D" type="Camera2D" parent="."]
