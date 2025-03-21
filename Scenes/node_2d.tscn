@@ -29,7 +29,7 @@ visible = false
 [node name="Home" type="Sprite2D" parent="."]
 z_index = 5
 material = SubResource("CanvasItemMaterial_qi0gu")
-position = Vector2(1671, 880)
+position = Vector2(1670, 880)
 rotation = 3.14159
 texture = SubResource("AtlasTexture_nr7dq")
 flip_v = true
