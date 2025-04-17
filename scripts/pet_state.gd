@@ -1,6 +1,6 @@
 extends Node
 enum PetState {IDLE, MOVE_TO, SLEEP, LOVING, IN_AIR, DRAGGING, HIDE, EAT }
-var current_state = PetState.IDLE
+var current_state: int = PetState.IDLE
 # Expose enum globally
 const PetStateEnum = PetState
 signal state_changed(new_state)

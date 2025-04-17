@@ -4,22 +4,22 @@ extends Node2D  # Use Node2D for proper movement
 @onready var collision_shape = $AnimatedSprite2D/Area2D/CollisionShape2D
 @onready var area2d = $AnimatedSprite2D/Area2D  # Reference to Area2D
 
-var velocity = Vector2(0, 0)  # Initial movement speed
-var acceleration = 100  # Acceleration factor for smooth movement
-var max_speed = 300  # Maximum walking speed
-var gravity = 300  # Gravity strength
-var bounce_factor = 0.4  # Bounce strength (1 = full energy, <1 = loses energy)
-var taskbar_margin = 62  # Prevents pet from colliding with the taskbar
-var on_floor = false  # Tracks if the pet is on the floor
-var friction = 0.99  # Friction factor (reduces velocity when sliding)
-var floor_drag = 0.02  # Additional drag for slowing down gradually
-var roaming_timer = 0  # Timer for changing movement direction
-var roaming_interval = 3.0  # Default interval before direction changes
-var target_direction = 1  # 1 for right, -1 for left
-var dragging = false  # Tracks if the pet is being dragged
-var drag_offset = Vector2.ZERO  # Offset between mouse and pet position
-var last_mouse_position = Vector2.ZERO  # Stores the last mouse position
-var mouse_velocity = Vector2.ZERO  # Stores the calculated mouse velocity
+var velocity: Vector2 = Vector2(0, 0)  # Initial movement speed
+var acceleration: int = 100  # Acceleration factor for smooth movement
+var max_speed: int       = 300  # Maximum walking speed
+var gravity: int         = 300  # Gravity strength
+var bounce_factor: float = 0.4  # Bounce strength (1 = full energy, <1 = loses energy)
+var taskbar_margin: int  = 62  # Prevents pet from colliding with the taskbar
+var on_floor: bool      = false  # Tracks if the pet is on the floor
+var friction: float = 0.99  # Friction factor (reduces velocity when sliding)
+var floor_drag: float = 0.02  # Additional drag for slowing down gradually
+var roaming_timer: int = 0  # Timer for changing movement direction
+var roaming_interval: float = 3.0  # Default interval before direction changes
+var target_direction: int   = 1  # 1 for right, -1 for left
+var dragging: bool        = false  # Tracks if the pet is being dragged
+var drag_offset: Vector2 = Vector2.ZERO  # Offset between mouse and pet position
+var last_mouse_position: Vector2 = Vector2.ZERO  # Stores the last mouse position
+var mouse_velocity: Vector2      = Vector2.ZERO  # Stores the calculated mouse velocity
 
 func _ready():
 	area2d.input_pickable = true  # Ensure Area2D detects clicks
@@ -44,7 +44,7 @@ func _ready():
 
 func _process(delta: float) -> void:
 	if dragging:
-		var mouse_pos = get_global_mouse_position()
+		var mouse_pos: Vector2 = get_global_mouse_position()
 		mouse_velocity = (mouse_pos - last_mouse_position) / delta  # Calculate mouse velocity
 		last_mouse_position = mouse_pos  # Store last mouse position
 		global_position = mouse_pos + drag_offset  # Follow mouse with offset
@@ -68,7 +68,7 @@ func _process(delta: float) -> void:
 
 # **🛠 Center the Pet in the Middle of the Screen**
 func center_pet():
-	var screen_size = DisplayServer.window_get_size()
+	var screen_size: Vector2i = DisplayServer.window_get_size()
 	global_position = screen_size / 2  # Move pet to center of the screen
 
 # **🛠 Set Roaming Interval (Changes Direction After X Seconds)**
@@ -96,8 +96,8 @@ func apply_friction(delta):
 
 # **🛠 Collisions & Bouncing on Borders**
 func check_collisions():
-	var screen_size = DisplayServer.window_get_size()
-	var shape_size = collision_shape.shape.size * collision_shape.scale / 2  # Half-size of CollisionShape
+	var screen_size: Vector2i = DisplayServer.window_get_size()
+	var shape_size            = collision_shape.shape.size * collision_shape.scale / 2  # Half-size of CollisionShape
 
 	# **Bottom Collision (Ground - Adjusted for Taskbar Margin)**
 	var bottom_limit = screen_size.y - shape_size.y - taskbar_margin
@@ -151,7 +151,7 @@ func update_passthrough():
 		var bottom_right = collision_shape.global_position + shape_size / 2
 
 		# Define only the pet's shape as non-pass-through, everything else click-through
-		var passthrough_area = PackedVector2Array([
+		var passthrough_area: PackedVector2Array = PackedVector2Array([
 			top_left, Vector2(bottom_right.x, top_left.y), 
 			bottom_right, Vector2(top_left.x, bottom_right.y)
 		])

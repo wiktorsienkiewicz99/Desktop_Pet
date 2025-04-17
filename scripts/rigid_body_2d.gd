@@ -2,8 +2,8 @@
 
 extends RigidBody2D
 
-var dragging = false
-var drag_offset = Vector2.ZERO  # Stores the difference between pet and cursor
+var dragging: bool       = false
+var drag_offset: Vector2 = Vector2.ZERO  # Stores the difference between pet and cursor
 
 func _ready():
 	input_pickable = true  # Enable click detection

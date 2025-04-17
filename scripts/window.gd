@@ -1,10 +1,10 @@
 extends Window
-
+#test
 @onready var _Camera: Camera2D = $Camera2D
-var sprite_size = Vector2.ZERO
-var last_position: = Vector2i.ZERO
-var velocity: = Vector2i.ZERO
-var position_offset = Vector2.ZERO
+var sprite_size: Vector2       = Vector2.ZERO
+var last_position: Vector2i = Vector2i.ZERO
+var velocity: Vector2i = Vector2i.ZERO
+var position_offset: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	if get_parent() is Sprite2D:

@@ -1,34 +1,28 @@
 extends Node
-@onready var pet = get_parent()
+@onready var pet: Node = get_parent()
 # Movement Variables
-var velocity = Vector2(0, 0)
-var acceleration = randi () % 40 + 80
-var max_speed = randi () % 100 + 250
-var gravity = 300
-var bounce_factor = 0.4
-var friction = 0.97
-var floor_drag = 0.02
+var velocity: Vector2 = Vector2(0, 0)
+var acceleration: int = randi () % 40 + 80
+var max_speed: int       = randi () % 100 + 250
+var gravity: int         = 300
+var bounce_factor: float = 0.4
+var friction: float      = 0.97
+var floor_drag           = 0.02
 var taskbar_margin = 36
 
-var on_floor = false  # Tracks if pet is on ground
-var floor_threshold = 1
-var roaming_timer = 0
-var roaming_interval = 3.0
-var target_direction = 1  # 1 (right) or -1 (left)
-var drag_offset = Vector2.ZERO
-var last_mouse_position = Vector2.ZERO
-var mouse_velocity = Vector2.ZERO
+var on_floor: bool       = false  # Tracks if pet is on ground
+var floor_threshold: int    = 1
+var roaming_timer: int      = 0
+var roaming_interval: float = 3.0
+var target_direction: int        = 1  # 1 (right) or -1 (left)
+var drag_offset: Vector2         = Vector2.ZERO
+var last_mouse_position: Vector2 = Vector2.ZERO
+var mouse_velocity: Vector2      = Vector2.ZERO
 
 func _ready() -> void:
 	print("MY SPEED: ", max_speed)
 
-func in_air(delta):
-	# Simulate gravity
-	#velocity.y += gravity * delta
-	#pet.global_position += velocity * delta
-	# Simulated screen edge collisions
-	return
-	
+
 func check_floor():
 	on_floor = abs(velocity.y) < floor_threshold
 	
@@ -59,9 +53,9 @@ func handle_dragging(delta):
 
 
 func handle_collisions(delta):
-	var screen_size = DisplayServer.window_get_size()
+	var screen_size: Vector2i = DisplayServer.window_get_size()
 	# **Ground Collision**
-	var bottom_limit = screen_size.y - taskbar_margin
+	var bottom_limit: int = screen_size.y - taskbar_margin
 	velocity.y += gravity * delta
 	pet.global_position += velocity * delta
 	if pet.global_position.y >= bottom_limit:
@@ -91,5 +85,5 @@ func change_direction():
 	pet.sprite_pet.flip_h = (target_direction == -1)
 
 func center_pet(offset):
-	var screen_size = DisplayServer.window_get_size()
+	var screen_size: Vector2i = DisplayServer.window_get_size()
 	pet.global_position = Vector2i(screen_size.x / 2, screen_size.y) + Vector2i(offset, taskbar_margin)

@@ -1,15 +1,15 @@
 extends Node
 
-@onready var state_manager = get_parent().get_node("PetState")
-@onready var pet = get_parent()
-@onready var movement = pet.get_node("PetMovement")
-@onready var home = get_tree().get_first_node_in_group("Home")  # Assuming home has a group "Home"
-@onready var sunflower = get_tree().get_first_node_in_group("Sunflower")  # Assuming sunflower has a group
+@onready var state_manager: Node = get_parent().get_node("PetState")
+@onready var pet: Node = get_parent()
+@onready var movement: Node = pet.get_node("PetMovement")
+@onready var home: Node = get_tree().get_first_node_in_group("Home")  # Assuming home has a group "Home"
+@onready var sunflower: Node = get_tree().get_first_node_in_group("Sunflower")  # Assuming sunflower has a group
 @onready var StateEnum = state_manager.get("PetStateEnum")
-var idle_timer = 0.0
-const IDLE_TIME_BEFORE_SLEEP = 5.0  # Sleep after 5s of idle
-var roaming_target = Vector2.ZERO
-var loving_end_frame = 5
+var idle_timer: float               = 0.0
+const IDLE_TIME_BEFORE_SLEEP: float = 5.0  # Sleep after 5s of idle
+var roaming_target: Vector2         = Vector2.ZERO
+var loving_end_frame: int           = 5
 
 
 func _ready():

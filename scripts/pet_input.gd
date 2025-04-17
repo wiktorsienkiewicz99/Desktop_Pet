@@ -1,5 +1,5 @@
 extends Node
-@onready var state = get_parent().get_node("PetState")
+@onready var state: Node = get_parent().get_node("PetState")
 @onready var StateEnum = state.get("PetStateEnum")
 
 

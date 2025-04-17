@@ -11,14 +11,14 @@ TODO:
 extends Node
 
 @onready var _MainWindow: Window = get_window()
-var pet_scene = preload("res://Scenes/pet.tscn")
-var current_pet: Node = null# Store the current pet instance
-var names = ["Panko", "Ksenia", "Mochi"]
+var pet_scene: PackedScene       = preload("res://Scenes/pet.tscn")
+var current_pet: Node            = null# Store the current pet instance
+var names: Array[Variant] = ["Panko", "Ksenia", "Mochi"]
 
 func spawn_pet():
 
-	var pet_name = names[randi() % 3]
-	var new_pet = pet_scene.instantiate()  
+	var pet_name      = names[randi() % 3]
+	var new_pet: Node = pet_scene.instantiate()  
 	new_pet.start_offset = randi() % 800 - 400
 	new_pet.name = pet_name
 	add_child(new_pet)
@@ -50,8 +50,8 @@ func _process(delta: float) -> void:
 		get_tree().quit()  # Close all windows and exit the game
 		
 func update_passthrough():
-	var screen_size = DisplayServer.window_get_size()  # Get the full window size
-	var passthrough_area = PackedVector2Array([
+	var screen_size: Vector2i                = DisplayServer.window_get_size()  # Get the full window size
+	var passthrough_area: PackedVector2Array = PackedVector2Array([
 		Vector2(0, 0),  # Top-left corner
 		Vector2(0, screen_size.y)  # Bottom-left corner
 	])
